@@ -28,7 +28,7 @@ export default function useAuth() {
             email: email,
             password: password,
         })
-        router.push({ path: 'chat' })
+        router.push({ path: 'login' })
     }
     
     return { signInUser, signUpNewUser }
