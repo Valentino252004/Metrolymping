@@ -10,12 +10,12 @@ const router = createRouter({
     history: createWebHistory(import.meta.env.BASE_URL),
     routes: [
         
-        {
+        /*{
             path: '/',
             redirect: () => {
                 return { name: 'rankings' };
             }
-        },
+        },*/
         {
             path: '/login',
             name: 'login',
@@ -25,7 +25,7 @@ const router = createRouter({
             path: '/signup',
             name: 'signup',
             component: SignUp
-        },
+        }/*,
         {
             path: '/rankings',
             name: 'rankings',
@@ -45,7 +45,7 @@ const router = createRouter({
             path: '/match/creation',
             name: 'matchCreation',
             component: MatchCreation
-        }
+        }*/
     ]
 });
 
@@ -54,16 +54,16 @@ async function isLoggedIn() {
     const { data } = await supabase.auth.getSession();
     return !!data.session;
 }
-
+/*
 router.beforeEach(async (to, from) => {
-    if (to.path != "/" || to.path != "/login" || to.path != "/rankings"){
+    if (to.path != "/" || to.path != "/login" || to.path != "/rankings" || to.path != "/signup"){
         const isLogged = await isLoggedIn()
         if (isLogged) {
             return true
         }
-        return "/rankings"
+        return "/login"
     }
     return true;
-})
+})*/
 
 export default router;
