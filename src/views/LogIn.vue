@@ -1,4 +1,15 @@
 <script setup>
+import {ref} from "vue";
+import useAuth from "../composables/auth";
+
+const email = ref("")
+const password = ref("")
+
+const { signInUser } = useAuth();
+
+function signIn() {
+    signInUser(email.value, password.value)
+}
 
 </script>
 
@@ -6,12 +17,13 @@
     <section class="flex flex-col items-center gap-4 p-20 bg-[#206090] vh-100">
         <h1 class="font-bold text-2xl">Metrolympiades</h1>
         <h2 class="font-bold text-xl">Login</h2>
-        <form class="flex flex-col items-center gap-4">
-            <input type="text" placeholder="Email" pattern="^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$">
-            <input type="password" placeholder="Password">
-            <button type="submit" class="bg-green-200">Get me in!</button>
-        </form>
-        <p>Don't have an account? <a href="#">Create an account!</a></p>
+        <div class="flex flex-col items-center gap-4">
+            <input type="text" placeholder="Email" v-model="email" pattern="^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$">
+            <input type="password" placeholder="Password" v-model="password">
+            <button type="submit" @click="signIn" class="bg-green-200">Get me in!</button>
+            <p>{{ error }}</p>
+        </div>
+        <p>Don't have an account? <a href="/signup">Create an account!</a></p>
         <button class="bg-blue-200">Guest Access</button>
     </section>
 </template>

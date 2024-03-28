@@ -3,27 +3,54 @@
     import {ref} from "vue";
     import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
     import { faTimes, faPlus } from "@fortawesome/free-solid-svg-icons";
+    import useUser from "../composables/user";
+    import useTeam from "../composables/team";
 
-    const listeMembers = ref(["Valentin Patey", "Théo Lesieur", "Raphaël Aubry"]);
+    const { getAuthUserId } = useUser();
+    const { getTeamWithLeader, setTeamName, setMembers } = useTeam();
+
+    const user = ref("");
+    const id = ref("");
+    const listeMembers = ref([]);
+
+    getAuthUserId().then(myId => {
+        id.value = myId;
+        getTeamWithLeader(myId).then(team => {
+            if (team.name != null)
+                user.value = team.name
+            if (team.members != null)
+                listeMembers.value = team.members
+        })
+    })
+    
+
+    function editTeamName(name) {
+        setTeamName(id.value, name)
+        user.value = name
+    }
 
     function addMember() {
         listeMembers.value.push("")
+        setMembers(id.value, listeMembers.value)
     }
 
     function editMember(index, newName) {
         listeMembers.value[index] = newName;
+        setMembers(id.value, listeMembers.value)
     }
 
     function removeMember(index) {
         listeMembers.value.splice(index, 1)
+        setMembers(id.value, listeMembers.value)
     }
 </script>
 
 <template>
-    <Menu></Menu>
+    <Menu>{{ user }}</Menu>
     <section class="flex flex-col items-center gap-4 p-20 bg-[#206090] h-[90vh] ph-[10vh]">
         <div class="flex flex-col lg:flex-row gap-4 items-center mb-8">
-            <h1 class="font-bold text-xl">Nom de l'équipe : </h1><input class="font-bold p-2" placeholder="Nom de l'équipe" value="team"></input>
+            <h1 class="font-bold text-xl">Nom de l'équipe : </h1>
+            <input @input="event => editTeamName(event.target.value)" class="font-bold p-2" placeholder="Nom de l'équipe" :value=user></input>
         </div>
 
         <div class="grid gap-4 grid-cols-[4fr_1fr] items-center" v-for="(member, index) in listeMembers">

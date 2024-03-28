@@ -2,9 +2,22 @@
 import { ref } from 'vue'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 import { faBars } from '@fortawesome/free-solid-svg-icons'
+import useUser from "../composables/user";
+import useTeam from "../composables/team";
 
-const dropdown = ref(null);
-const opacityDiv = ref(null);
+const { getAuthUserId } = useUser();
+const { getTeamWithLeader } = useTeam();
+
+const user = ref("");
+const id = ref("");
+
+getAuthUserId().then(myId => {
+    id.value = myId;
+    getTeamWithLeader(myId).then(team => {
+        if (team.name != null)
+            user.value = team.name
+    })
+})
 
 function openMenu() {
     let dropDownStyle = dropdown.value.style
@@ -16,7 +29,7 @@ function openMenu() {
 </script>
 <template>
     <header @click="openMenu" class="flex items-center text-white bg-[#183048] p-5 h-[10vh]">
-        <span class="w-[95vw]">Team Name (à changer vraiment aller)</span>
+        <span class="w-[95vw]"><slot>{{ user }}</slot></span>
         <FontAwesomeIcon id="burger" :icon="faBars" />
     </header>
     <nav class="text-white bg-[#183048] absolute top-[10vh] left-0 w-[100vw] max-w-[100%] z-10" ref="dropdown">
