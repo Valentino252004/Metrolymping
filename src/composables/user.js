@@ -9,5 +9,5 @@ export default function useUser() {
         return user['id']
     }
 
-    return (getAuthUserId);
+    return { getAuthUserId };
 }

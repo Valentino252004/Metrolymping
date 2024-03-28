@@ -13,10 +13,8 @@ export default function useAuth() {
             password: password,
         })
 
-        console.log(data)
-
         if (error == null) {
-            router.push({ path: 'chat' })
+            router.push({ path: 'team' })
             return true;
         }
 
@@ -28,7 +26,7 @@ export default function useAuth() {
             email: email,
             password: password,
         })
-        router.push({ path: 'login' })
+        router.push({ path: 'team' })
     }
     
     return { signInUser, signUpNewUser }

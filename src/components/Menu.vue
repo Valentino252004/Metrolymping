@@ -2,51 +2,64 @@
 import { ref } from 'vue'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 import { faBars } from '@fortawesome/free-solid-svg-icons'
+import useUser from "../composables/user";
+import useTeam from "../composables/team";
 
-const dropdown = ref(null);
+const { getAuthUserId } = useUser();
+const { getTeamWithLeader } = useTeam();
 
-function test() {
-    let style = dropdown.value.style
-    style.display = (style.display != "flex" ? "flex" : "none")
+const user = ref("");
+const id = ref("");
+
+getAuthUserId().then(myId => {
+    id.value = myId;
+    getTeamWithLeader(myId).then(team => {
+        if (team.name != null)
+            user.value = team.name
+    })
+})
+
+function openMenu() {
+    let dropDownStyle = dropdown.value.style
+    dropDownStyle.display = (dropDownStyle.display != "flex" ? "flex" : "none")
+    let opacityStyle = opacityDiv.value.style
+    opacityStyle.display = (opacityStyle.display != "block" ? "block" : "none")
 }
 
 </script>
 <template>
-    <header>
-        <span>Team Name (à changer vraiment aller)</span>
-        <FontAwesomeIcon @click="test" id="burger" :icon="faBars" />
+    <header @click="openMenu" class="flex items-center text-white bg-[#183048] p-5 h-[10vh]">
+        <span class="w-[95vw]"><slot>{{ user }}</slot></span>
+        <FontAwesomeIcon id="burger" :icon="faBars" />
     </header>
-    <nav ref="dropdown">
+    <nav class="text-white bg-[#183048] absolute top-[10vh] left-0 w-[100vw] max-w-[100%] z-10" ref="dropdown">
         <a href="#">Team Settings</a>
         <a href="#">Rankings</a>
         <a href="#">Matches</a>
         <a href="#">Logout</a>
-        <a class="text-xs" href="#">Login</a>
-        <a class="text-xs" href="#">Sign up</a>
+        <a href="#">Login</a>
+        <a href="#">Sign up</a>
     </nav>
+    <div id="opacityDiv" class="absolute h-[90vh] top-[10vh] w-[100vw] bg-[#000000c0]" ref="opacityDiv"></div>
 </template>
 
 <style>
-    header {
-        color: white;
-        display: grid;
-        grid-template-columns: 8fr 1fr;
-        height: 50px;
-        padding: 10px;
-        background-color: #206090;
-    }
 
     nav {
         display: none;
         flex-direction: column;
-        color: white;
-        background-color: #206090;
     }
 
     nav a {
         padding: 10px;
         padding-left: 20px;
-        border-bottom: 1px solid white;
+        border-top: 1px solid white;
+        text-decoration: none;
+        color: white;
+    }
+
+    #opacityDiv {
+        display: none;
     }
 
     #burger {
