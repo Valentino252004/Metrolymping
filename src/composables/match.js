@@ -11,11 +11,23 @@ export default function useMatch() {
         return data;
     }
 
+    async function getAllSports() {
+        const { data } = await supabase.from('matchs').select("sport")
+        return new Set(data.map((key) => key["sport"]));
+    }
+
     async function editScore(id, score, team) {
         if (team == 1)
             await supabase.from("matchs").update({"team1_score": score}).eq("id", id)
         else
             await supabase.from("matchs").update({"team2_score": score}).eq("id", id)
+    }
+
+    async function insertMatch(team1, team2, sport, time) {
+        await supabase.from("matchs").insert({"team1": team1,
+                                              "team2": team2,
+                                              "sport": sport,
+                                              "time" : time})
     }
 
     async function getOrderedRankings() {
@@ -43,5 +55,5 @@ export default function useMatch() {
         return Object.keys(teams).map((key) => [key, teams[key]]).sort((a, b) => b[1] - a[1]);
     }
 
-    return { getOrderedRankings, getAllMatches, editScore };
+    return { getOrderedRankings, getAllMatches, editScore, getAllSports, insertMatch };
 }

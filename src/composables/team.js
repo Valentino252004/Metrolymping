@@ -4,6 +4,11 @@ const {supabase} = useSupabase()
 
 export default function useTeam() {
 
+    async function getAllTeams() {
+        const { data } = await supabase.from('teams').select("id, name, members")
+        return data;
+    }
+
     async function getTeamWithLeader(leaderId) {
         const { data } = await supabase.from('teams').select("id, name, members").eq('leader', leaderId)
         return data[0]
@@ -17,5 +22,5 @@ export default function useTeam() {
         await supabase.from('teams').update({ members: array }).eq("leader", id)
     }
 
-    return { getTeamWithLeader, setTeamName, setMembers };
+    return { getTeamWithLeader, setTeamName, setMembers, getAllTeams };
 }

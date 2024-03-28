@@ -25,7 +25,7 @@ function signUp() {
         error.value += "Les mots de passe sont différents<br>"
     }
     if (error.value == "") {
-        signUpNewUser(email.value, password.value)
+        signUpNewUser(email.value, password.value).then(myError => error.value = myError)
     }
 }
 

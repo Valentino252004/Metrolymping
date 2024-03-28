@@ -49,7 +49,7 @@
     <Menu>{{ user }}</Menu>
     <section class="flex flex-col items-center gap-4 p-20 bg-[#206090] min-h-[90vh] ph-[10vh]">
         <div class="flex flex-col lg:flex-row gap-4 items-center mb-8">
-            <h1 class="font-bold text-xl">Nom de l'équipe : </h1>
+            <h1 class="font-bold text-xl">Team Name: </h1>
             <input @input="event => editTeamName(event.target.value)" class="font-bold p-2" placeholder="Nom de l'équipe" :value=user></input>
         </div>
 

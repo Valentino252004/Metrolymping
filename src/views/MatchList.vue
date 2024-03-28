@@ -1,6 +1,7 @@
 <script setup>
     import Menu from "../components/Menu.vue";
     import useMatch from "@/composables/match";
+    import router from "@/router/main_router";
     import { ref } from "vue";
 
     const { getAllMatches, editScore } = useMatch();
@@ -8,12 +9,17 @@
     const matches = ref([])
 
     getAllMatches().then(myMatches => matches.value = myMatches)
+
+    function createMatch() {
+        router.push({path: "/match/creation"})
+    }
 </script>
 
 <template>
     <Menu></Menu>
     <section class="flex flex-col items-center gap-4 p-10 bg-[#206090] min-h-[90vh] ph-[10vh]">
         <div class="w-fit flex flex-col gap-4">
+            <button @click="createMatch" class="bg-green-500 text-white font-bold rounded-md mb-4">Create a match</button>
             <div class="text-white match" v-for="match in matches">
                 <div class="matchTitle">
                     <span>{{ match["time"].substr(0, 5) }}</span>

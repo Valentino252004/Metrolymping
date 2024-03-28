@@ -46,7 +46,7 @@ function openMenu() {
     <nav class="text-white bg-[#183048] absolute top-[10vh] left-0 w-[100vw] max-w-[100%] z-10" ref="dropdown">
         <a v-if="!isGuest" href="/team">Team Settings</a>
         <a href="/rankings">Rankings</a>
-        <a href="/match/all">Matches</a>
+        <a v-if="!isGuest" href="/match/all">Matches</a>
         <a @click="logOut" v-if="!isGuest" href="#">Logout</a>
         <a v-if="isGuest" href="/login">Login</a>
         <a v-if="isGuest" href="/signup">Sign up</a>
