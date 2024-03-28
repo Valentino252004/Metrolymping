@@ -4,7 +4,7 @@ import useSupabase from '../composables/supabase'
 import LogIn from "../views/LogIn.vue"
 import SignUp from "../views/SignUp.vue"
 import Team from "../views/Team.vue"
-import Menu from "../components/Menu.vue"
+import Rankings from "../views/Rankings.vue"
 
 const {supabase} = useSupabase()
 
@@ -35,12 +35,12 @@ const router = createRouter({
                 protected: true
             },
             component: Team
-        },/*,
+        },
         {
             path: '/rankings',
             name: 'rankings',
             component: Rankings
-        },
+        }/*,
         {
             path: '/match/all',
             name: 'matchList',

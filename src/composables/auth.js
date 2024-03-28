@@ -28,6 +28,11 @@ export default function useAuth() {
         })
         router.push({ path: 'team' })
     }
-    
-    return { signInUser, signUpNewUser }
+
+    async function logOut() {
+        const { error } = await supabase.auth.signOut()
+        router.push({ path: 'login' })
+    }
+
+    return { signInUser, signUpNewUser, logOut }
 }

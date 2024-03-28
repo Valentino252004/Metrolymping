@@ -2,23 +2,32 @@
 import { ref } from 'vue'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 import { faBars } from '@fortawesome/free-solid-svg-icons'
+import useAuth from "../composables/auth";
 import useUser from "../composables/user";
 import useTeam from "../composables/team";
 
+const { logOut } = useAuth();
 const { getAuthUserId } = useUser();
 const { getTeamWithLeader } = useTeam();
 
 const user = ref("");
+const isGuest = ref(true);
 const id = ref("");
 const dropdown = ref(null);
 const opacityDiv = ref(null);
 
 getAuthUserId().then(myId => {
-    id.value = myId;
-    getTeamWithLeader(myId).then(team => {
-        if (team.name != null)
-            user.value = team.name
-    })
+    if (myId == null) {
+        user.value = "Guest"
+        isGuest.value = true;
+    } else {
+        id.value = myId;
+        isGuest.value = false;
+        getTeamWithLeader(myId).then(team => {
+            if (team.name != null)
+                user.value = team.name
+        })
+    }
 })
 
 function openMenu() {
@@ -35,12 +44,12 @@ function openMenu() {
         <FontAwesomeIcon id="burger" :icon="faBars" />
     </header>
     <nav class="text-white bg-[#183048] absolute top-[10vh] left-0 w-[100vw] max-w-[100%] z-10" ref="dropdown">
-        <a href="#">Team Settings</a>
-        <a href="#">Rankings</a>
+        <a v-if="!isGuest" href="/team">Team Settings</a>
+        <a href="/rankings">Rankings</a>
         <a href="#">Matches</a>
-        <a href="#">Logout</a>
-        <a href="#">Login</a>
-        <a href="#">Sign up</a>
+        <a @click="logOut" v-if="!isGuest" href="#">Logout</a>
+        <a v-if="isGuest" href="/login">Login</a>
+        <a v-if="isGuest" href="/signup">Sign up</a>
     </nav>
     <div id="opacityDiv" class="absolute h-[90vh] top-[10vh] w-[100vw] bg-[#000000c0]" ref="opacityDiv"></div>
 </template>
