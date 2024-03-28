@@ -10,6 +10,8 @@ const { getTeamWithLeader } = useTeam();
 
 const user = ref("");
 const id = ref("");
+const dropdown = ref(null);
+const opacityDiv = ref(null);
 
 getAuthUserId().then(myId => {
     id.value = myId;
