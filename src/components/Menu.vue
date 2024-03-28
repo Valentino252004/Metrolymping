@@ -46,12 +46,12 @@ function openMenu() {
     <nav class="text-white bg-[#183048] absolute top-[10vh] left-0 w-[100vw] max-w-[100%] z-10" ref="dropdown">
         <a v-if="!isGuest" href="/team">Team Settings</a>
         <a href="/rankings">Rankings</a>
-        <a href="#">Matches</a>
+        <a href="/match/all">Matches</a>
         <a @click="logOut" v-if="!isGuest" href="#">Logout</a>
         <a v-if="isGuest" href="/login">Login</a>
         <a v-if="isGuest" href="/signup">Sign up</a>
     </nav>
-    <div id="opacityDiv" class="absolute h-[90vh] top-[10vh] w-[100vw] bg-[#000000c0]" ref="opacityDiv"></div>
+    <div id="opacityDiv" class="fixed top-[10vh] h-[100%] w-[100vw] bg-[#000000c0]" ref="opacityDiv"></div>
 </template>
 
 <style>

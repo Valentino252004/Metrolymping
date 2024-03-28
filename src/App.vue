@@ -7,4 +7,7 @@
 </template>
 
 <style scoped>
+    * {
+        color: black;
+    }
 </style>
