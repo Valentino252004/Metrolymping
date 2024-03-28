@@ -1,7 +1,9 @@
 <script setup>
 import {ref} from "vue";
 import useAuth from "../composables/auth";
+import { useRouter } from "vue-router";
 
+const router = useRouter()
 const email = ref("")
 const password = ref("")
 
@@ -9,6 +11,10 @@ const { signInUser } = useAuth();
 
 function signIn() {
     signInUser(email.value, password.value)
+}
+
+function goToRankings() {
+    router.push({ path: 'rankings' })
 }
 
 </script>
@@ -24,7 +30,7 @@ function signIn() {
             <p>{{ error }}</p>
         </div>
         <p>Don't have an account? <a href="/signup">Create an account!</a></p>
-        <button class="bg-blue-200">Guest Access</button>
+        <button @click="goToRankings" class="bg-blue-200">Guest Access</button>
     </section>
 </template>
 
