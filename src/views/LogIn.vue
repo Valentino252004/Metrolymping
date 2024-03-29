@@ -6,11 +6,12 @@ import { useRouter } from "vue-router";
 const router = useRouter()
 const email = ref("")
 const password = ref("")
+const error = ref("")
 
 const { signInUser } = useAuth();
 
 function signIn() {
-    signInUser(email.value, password.value)
+    signInUser(email.value, password.value).then(myError => error.value = myError)
 }
 
 function goToRankings() {

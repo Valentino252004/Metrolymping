@@ -5,6 +5,8 @@ import LogIn from "../views/LogIn.vue"
 import SignUp from "../views/SignUp.vue"
 import Team from "../views/Team.vue"
 import Rankings from "../views/Rankings.vue"
+import MatchList from "../views/MatchList.vue"
+import MatchCreation from '../views/MatchCreation.vue';
 
 const {supabase} = useSupabase()
 
@@ -40,17 +42,23 @@ const router = createRouter({
             path: '/rankings',
             name: 'rankings',
             component: Rankings
-        }/*,
+        },
         {
             path: '/match/all',
             name: 'matchList',
+            meta: {
+                protected: true
+            },
             component: MatchList
         },
         {
             path: '/match/creation',
             name: 'matchCreation',
+            meta: {
+                protected: true
+            },
             component: MatchCreation
-        }*/
+        }
     ]
 });
 

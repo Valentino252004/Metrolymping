@@ -4,6 +4,32 @@ const {supabase} = useSupabase()
 
 export default function useMatch() {
 
+    async function getAllMatches() {
+        const { data } = await supabase.from("matchs")
+                                       .select('id, team1 (name), team2 (name), team1_score, team2_score, time, sport')
+                                       .order('time');
+        return data;
+    }
+
+    async function getAllSports() {
+        const { data } = await supabase.from('matchs').select("sport")
+        return new Set(data.map((key) => key["sport"]));
+    }
+
+    async function editScore(id, score, team) {
+        if (team == 1)
+            await supabase.from("matchs").update({"team1_score": score}).eq("id", id)
+        else
+            await supabase.from("matchs").update({"team2_score": score}).eq("id", id)
+    }
+
+    async function insertMatch(team1, team2, sport, time) {
+        await supabase.from("matchs").insert({"team1": team1,
+                                              "team2": team2,
+                                              "sport": sport,
+                                              "time" : time})
+    }
+
     async function getOrderedRankings() {
         const { data } = await supabase.from('matchs').select('team1 (name), team2 (name), team1_score, team2_score')
         let teams = {};
@@ -23,11 +49,11 @@ export default function useMatch() {
                 t1_result = 0;
                 t2_result = 3;
             }
-            teams[t1_name] = t2_result + (teams[t1_name] ? teams[t1_name] : 0)
-            teams[t2_name] = t1_result + (teams[t2_name] ? teams[t1_name] : 0)
+            teams[t1_name] = t1_result + (teams[t1_name] ? teams[t1_name] : 0)
+            teams[t2_name] = t2_result + (teams[t2_name] ? teams[t2_name] : 0)
         }
         return Object.keys(teams).map((key) => [key, teams[key]]).sort((a, b) => b[1] - a[1]);
     }
 
-    return { getOrderedRankings };
+    return { getOrderedRankings, getAllMatches, editScore, getAllSports, insertMatch };
 }
