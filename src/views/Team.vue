@@ -57,7 +57,7 @@
             <input @input="event => editMember(index, event.target.value)" class="font-bold p-2" :value=member>
             <button @click="removeMember(index)" class="bg-red-500 h-[80%] aspect-square"><FontAwesomeIcon class="pt-[2px] text-xl text-white" @click="test" id="supprMember" :icon="faTimes" /></button>
         </div>
-        <button @click="addMember" class="mt-3 p-3 flex gap-3 center-items text-white bg-green-600"><span>Ajouter un membre</span><FontAwesomeIcon class="pt-[3px] text-xl" @click="test" id="supprMember" :icon="faPlus" /></button>
+        <button v-if="listeMembers.length < 5" @click="addMember" class="mt-3 p-3 flex gap-3 center-items text-white bg-green-600"><span>Ajouter un membre</span><FontAwesomeIcon class="pt-[3px] text-xl" @click="test" id="supprMember" :icon="faPlus" /></button>
     </section>
 </template>
 
