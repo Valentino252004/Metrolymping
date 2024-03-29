@@ -58,9 +58,4 @@ function signUp() {
         padding: 5px;
         border-radius: 4px;
     }
-
-    a {
-        color: blue;
-        text-decoration: underline;
-    }
 </style>

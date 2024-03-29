@@ -49,7 +49,7 @@
     <Menu>{{ user }}</Menu>
     <section class="flex flex-col items-center gap-4 p-20 bg-[#206090] min-h-[90vh] ph-[10vh]">
         <div class="flex flex-col lg:flex-row gap-4 items-center mb-8">
-            <h1 class="font-bold text-xl">Team Name: </h1>
+            <label class="font-bold text-xl text-white">Team Name: </label>
             <input @input="event => editTeamName(event.target.value)" class="font-bold p-2" placeholder="Nom de l'équipe" :value=user></input>
         </div>
 
@@ -62,10 +62,6 @@
 </template>
 
 <style>
-    h1, h2, p {
-        color: white;
-    }
-
     input {
         border: 1px solid black;
         border-radius: 3px;
@@ -77,9 +73,5 @@
         border: 1px solid black;
         padding: 5px;
         border-radius: 4px;
-    }
-    a {
-        color: blue;
-        text-decoration: underline;
     }
 </style>

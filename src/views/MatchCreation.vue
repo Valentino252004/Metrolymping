@@ -34,22 +34,32 @@
 <template>
     <Menu></Menu>
     <section class="flex flex-col text-black items-center gap-4 p-10 bg-[#206090] min-h-[90vh] ph-[10vh]">
-        <div class="w-fit flex flex-col gap-4">
-            <label class="text-white font-bold text-xl">Team 1:</label>
-            <select class="p-2 font-bold bg-white" v-model="team1">
-                <option :value="team['id']" class="font-bold" v-for="team in teams">{{ team['name'] }}</option>
-            </select>
-            <label class="text-white font-bold text-xl">Team 2:</label>
-            <select class="p-2 font-bold bg-white" v-model="team2">
-                <option :value="team['id']" class="font-bold" v-for="team in teams">{{ team['name'] }}</option>
-            </select>
-            <label class="text-white font-bold text-xl">Sport:</label>
-            <input class="text-left pl-2" type="text" list="sports" v-model="sport">
-            <datalist id="sports">
-                <option class="font-bold" v-for="sport in sports">{{ sport }}</option>
-            </datalist>
-            <label class="text-white font-bold text-xl">Time:</label>
-            <input class="text-left pl-2" type="time" v-model="time">
+        <div class="w-fit flex flex-col gap-8">
+            <div class="x-input">
+                <label class="text-white font-bold text-xl">Team 1:</label>
+                <select class="p-2 font-bold bg-white" v-model="team1">
+                    <option :value="team['id']" class="font-bold" v-for="team in teams">{{ team['name'] }}</option>
+                </select>
+            </div>
+            <div class="x-input">
+                <label class="text-white font-bold text-xl">Team 2:</label>
+                <select class="p-2 font-bold bg-white" v-model="team2">
+                    <option :value="team['id']" class="font-bold" v-for="team in teams">{{ team['name'] }}</option>
+                </select>
+            </div>
+
+            <div class="x-input">
+                <label class="text-white font-bold text-xl">Sport:</label>
+                <input class="text-left pl-2" type="text" list="sports" v-model="sport">
+                <datalist id="sports">
+                    <option class="font-bold" v-for="sport in sports">{{ sport }}</option>
+                </datalist>
+            </div>
+
+            <div class="x-input">
+                <label class="text-white font-bold text-xl">Time:</label>
+                <input class="text-left" type="time" v-model="time">
+            </div>
 
             <button class="bg-green-500 text-white font-bold mt-5" type="submit" @click="addMatch">Add Match</button>
 
@@ -61,5 +71,15 @@
 <style>
     h1, h2, p {
         color: white;
+    }
+
+    .x-input {
+        display: grid;
+        gap: 5px;
+        grid-template-columns: 100px 200px;
+    }
+
+    @media (max-width: 768px) {
+        
     }
 </style>

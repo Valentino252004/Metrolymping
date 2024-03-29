@@ -53,7 +53,7 @@ function goToRankings() {
     }
 
     a {
-        color: blue;
+        color: lime;
         text-decoration: underline;
     }
 </style>
