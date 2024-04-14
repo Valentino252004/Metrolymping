@@ -17,7 +17,7 @@ const router = createRouter({
         {
             path: '/',
             redirect: () => {
-                return { name: 'team' };
+                return { name: 'team'};
             }
         },
         {
