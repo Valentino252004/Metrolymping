@@ -20,7 +20,7 @@ function goToRankings() {
 
 </script>
 
-<template class ="min-vh-100 vh-100">
+<template>
     <section class="flex flex-col items-center gap-4 p-10 bg-[#206090] min-vh-100">
         <h1 class="font-bold text-2xl">Metrolympiades</h1>
         <h2 class="font-bold text-xl">Login</h2>
@@ -30,7 +30,7 @@ function goToRankings() {
             <button type="submit" @click="signIn" class="bg-green-200">Get me in!</button>
             <p>{{ error }}</p>
         </div>
-        <p>Don't have an account? <a href="/signup">Create an account!</a></p>
+        <p>Don't have an account? <a href="/signup" class="underline text-lime-500">Create an account!</a></p>
         <button @click="goToRankings" class="bg-blue-200">Guest Access</button>
     </section>
 </template>
