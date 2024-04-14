@@ -21,7 +21,7 @@ function goToRankings() {
 </script>
 
 <template>
-    <section class="flex flex-col items-center gap-4 p-10 bg-[#206090] min-vh-100">
+    <section class="flex flex-col items-center gap-4 p-10 bg-[#206090] min-vh-100 vh-100">
         <h1 class="font-bold text-2xl">Metrolympiades</h1>
         <h2 class="font-bold text-xl">Login</h2>
         <div class="flex flex-col items-center gap-4">
