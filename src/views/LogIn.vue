@@ -51,10 +51,4 @@ function goToRankings() {
         padding: 5px;
         border-radius: 4px;
     }
-
-    a {
-        color: lime;
-        text-decoration: underline;
-    }
-
 </style>

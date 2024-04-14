@@ -65,8 +65,8 @@
     input {
         border: 1px solid black;
         border-radius: 3px;
-        padding: 3px;
-        color: black;
+        padding: 3px !important;
+        color: black !important;
     }
 
     button {
