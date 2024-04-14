@@ -32,7 +32,7 @@ function signUp() {
 </script>
 
 <template>
-    <section class="flex flex-col items-center gap-4 p-20 bg-[#206090] min-vh-100">
+    <section class="flex flex-col items-center gap-4 p-20 bg-[#206090] min-vh-100 vh-100">
         <h2 class="font-bold text-xl">Create an account</h2>
         <input type="text" placeholder="Email" v-model="email">
         <input type="password" placeholder="Password" v-model="password">
